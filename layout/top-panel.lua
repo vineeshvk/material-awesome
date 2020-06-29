@@ -12,12 +12,13 @@ local dpi = require('beautiful').xresources.apply_dpi
 local icons = require('theme.icons')
 
 -- Clock / Calendar 24h format
-local textclock = wibox.widget.textclock('<span font="Roboto Mono bold 9">%d.%m.%Y\n     %H:%M</span>')
+-- local textclock = wibox.widget.textclock('<span font="Roboto Mono bold 9">%d %h %Y\n     %I:%M %p</span>')
 
 -- Clock / Calendar 12AM/PM fornat
--- local textclock = wibox.widget.textclock('<span font="Roboto Mono bold 9">%d.%m.%Y\n  %I:%M %p</span>\n<span font="Roboto Mono bold 9">%p</span>')
+local textclock = wibox.widget.textclock('<span font="Roboto Mono bold 9">%I:%M %p</span>')
 -- textclock.forced_height = 56
-
+local sep = wibox.widget.textclock('')
+local seperator = wibox.container.margin(sep, dpi(25), dpi(0), dpi(0), dpi(0))
 -- Add a calendar (credits to kylekewley for the original code)
 local month_calendar = awful.widget.calendar_popup.month({
   screen = s,
@@ -90,14 +91,14 @@ end
 local TopPanel = function(s, offset)
   local offsetx = 0
   if offset == true then
-    offsetx = dpi(48)
+    offsetx = dpi(38)
   end
   local panel =
     wibox(
     {
       ontop = true,
       screen = s,
-      height = dpi(48),
+      height = dpi(35),
       width = s.geometry.width - offsetx,
       x = s.geometry.x + offsetx,
       y = s.geometry.y,
@@ -105,14 +106,16 @@ local TopPanel = function(s, offset)
       bg = beautiful.background.hue_800,
       fg = beautiful.fg_normal,
       struts = {
-        top = dpi(48)
+        top = dpi(35),
       }
     }
   )
 
+--  local panel = wibox.container.margin(panelw,dpi(30),dpi(0),dpi(0),dpi(0))
+
   panel:struts(
     {
-      top = dpi(48)
+      top = dpi(35)
     }
   )
 
@@ -120,6 +123,7 @@ local TopPanel = function(s, offset)
     layout = wibox.layout.align.horizontal,
     {
       layout = wibox.layout.fixed.horizontal,
+      seperator,
       -- Create a taglist widget
       TaskList(s),
       add_button

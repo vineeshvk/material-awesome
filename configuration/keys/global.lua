@@ -43,7 +43,7 @@ local globalKeys =
     {description = 'show main menu', group = 'awesome'}
   ),
   awful.key(
-    {altkey},
+    {modkey},
     'space',
     function()
       _G.screen.primary.left_panel:toggle(true)
@@ -88,9 +88,9 @@ local globalKeys =
     {modkey},
     'Print',
     function()
-      awful.util.spawn_with_shell(apps.default.delayed_screenshot)
+      awful.util.spawn_with_shell(apps.default.window_screenshot)
     end,
-    {description = 'Mark an area and screenshot it 10 seconds later (clipboard)', group = 'screenshots (clipboard)'}
+    {description = 'Select a window to take screenshot and save it to storage', group = 'screenshots (clipboard)'}
   ),
   awful.key(
     {},
@@ -98,15 +98,15 @@ local globalKeys =
     function()
       awful.util.spawn_with_shell(apps.default.screenshot)
     end,
-    {description = 'Take a screenshot of your active monitor and copy it to clipboard', group = 'screenshots (clipboard)'}
+    {description = 'Take a screenshot of your active monitor and save it to storage', group = 'screenshots (clipboard)'}
   ),
   awful.key(
     {'Control'},
     'Print',
     function()
-      awful.util.spawn_with_shell(apps.default.region_screenshot)
+      awful.util.spawn_with_shell(apps.default.cp_screenshot)
     end,
-    {description = 'Mark an area and screenshot it to your clipboard', group = 'screenshots (clipboard)'}
+    {description = 'Take a screenshot of your active monitor and copy it to clipboard', group = 'screenshots (clipboard)'}
   ),
   awful.key(
     {modkey},
@@ -127,7 +127,7 @@ local globalKeys =
   -- Standard program
   awful.key(
     {modkey},
-    'x',
+    't',
     function()
       awful.spawn(apps.default.terminal)
     end,
@@ -200,7 +200,7 @@ local globalKeys =
     {description = 'decrease the number of columns', group = 'layout'}
   ),
   awful.key(
-    {modkey},
+    {altkey},
     'space',
     function()
       awful.layout.inc(1)
@@ -334,7 +334,7 @@ local globalKeys =
   -- Open default program for tag
   awful.key(
     {modkey},
-    't',
+    'x',
     function()
       awful.spawn(
           awful.screen.focused().selected_tag.defaultApp,

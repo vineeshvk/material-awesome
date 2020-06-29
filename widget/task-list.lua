@@ -56,14 +56,14 @@ local function list_update(w, buttons, label, data, objects)
         clickable_container(
         wibox.container.margin(
           wibox.widget.imagebox(os.getenv('HOME') .. '/.config/awesome/theme/icons/tag-list/tag/close.png'),
-          4,
-          4,
-          4,
-          4
+          2,
+          2,
+          2,
+          2
         )
       )
       cb.shape = gears.shape.circle
-      cbm = wibox.container.margin(cb, dpi(4), dpi(8), dpi(12), dpi(12))
+      cbm = wibox.container.margin(cb, dpi(0), dpi(0), dpi(8), dpi(8))
       cbm:buttons(
         gears.table.join(
           awful.button(
@@ -79,16 +79,16 @@ local function list_update(w, buttons, label, data, objects)
       bg_clickable = clickable_container()
       bgb = wibox.container.background()
       tbm = wibox.container.margin(tb, dpi(4), dpi(4))
-      ibm = wibox.container.margin(ib, dpi(12), dpi(12), dpi(12), dpi(12))
+      ibm = wibox.container.margin(ib, dpi(10), dpi(10), dpi(8), dpi(8))
       l = wibox.layout.fixed.horizontal()
       ll = wibox.layout.fixed.horizontal()
 
       -- All of this is added in a fixed widget
       l:fill_space(true)
       l:add(ibm)
-      l:add(tbm)
+      -- l:add(tbm)
       ll:add(l)
-      ll:add(cbm)
+      -- ll:add(cbm)
 
       bg_clickable:set_widget(ll)
       -- And all of this gets a background
@@ -118,22 +118,22 @@ local function list_update(w, buttons, label, data, objects)
     args = args or {}
 
     -- The text might be invalid, so use pcall.
-    if text == nil or text == '' then
-      tbm:set_margins(0)
-    else
-      -- truncate when title is too long
-      local textOnly = text:match('>(.-)<')
-      if (textOnly:len() > 24) then
-        text = text:gsub('>(.-)<', '>' .. textOnly:sub(1, 21) .. '...<')
-        tt:set_text(textOnly)
-        tt:add_to_object(tb)
-      else
-        tt:remove_from_object(tb)
-      end
-      if not tb:set_markup_silently(text) then
-        tb:set_markup('<i>&lt;Invalid text&gt;</i>')
-      end
-    end
+    -- if text == nil or text == '' then
+    --   tbm:set_margins(0)
+    -- else
+    --   -- truncate when title is too long
+    --   local textOnly = text:match('>(.-)<')
+    --   if (textOnly:len() > 24) then
+    --     text = text:gsub('>(.-)<', '>' .. textOnly:sub(1, 21) .. '...<')
+    --     tt:set_text(textOnly)
+    --     tt:add_to_object(tb)
+    --   else
+    --     tt:remove_from_object(tb)
+    --   end
+    --   if not tb:set_markup_silently(text) then
+    --     tb:set_markup('<i>&lt;Invalid text&gt;</i>')
+    --   end
+    -- end
     bgb:set_bg(bg)
     if type(bg_image) == 'function' then
       -- TODO: Why does this pass nil as an argument?
@@ -210,3 +210,5 @@ local TaskList = function(s)
 end
 
 return TaskList
+
+

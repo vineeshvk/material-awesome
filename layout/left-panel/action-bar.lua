@@ -32,7 +32,7 @@ return function(screen, panel, action_bar_width)
   local menu_icon =
     wibox.widget {
     icon = icons.menu,
-    size = dpi(24),
+    size = dpi(20),
     widget = mat_icon
   }
 
